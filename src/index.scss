@@ -165,3 +165,244 @@ a, ul, li{
     }
   }
 }
+
+.overlay{
+position: absolute;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+z-index: 1;
+background-color: rgba(0, 0, 0, 0.3);
+}
+
+.drawer{
+position: absolute;
+height: 100%;
+width: 420px;
+box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.1);
+right: 0;
+background-color: #fff;
+padding: 30px;
+display: flex;
+flex-direction: column;
+&__title{
+  margin: 0;
+  font-size: 24px;
+  display: flex;
+  justify-content: space-between;
+}
+&__items{
+  height: 100%;
+  overflow: auto;
+  margin-bottom: 40px;
+}
+&__list{
+  &-item{
+    display: flex;
+    &--dashed{
+      flex: 1;
+      border-bottom: 1px dashed #dfdfdf;
+      margin: 0 7px;
+    }
+    &--buy{
+      margin-top: 30px;
+      width: 100%;
+      height: 55px;
+      border: 0;
+      border-radius: 19px;
+      background-color: #156963;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color .2s ease-in-out;
+      &:hover{
+        background-color: lighten(#156963, 5%);
+      }
+      &:active{
+        background-color: darken(#156963, 5%);
+      }
+    }
+    &--total{
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 16px;
+    }
+  }
+}
+&__item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  border: 2px solid #f2f2f2;
+  border-radius: 20px;
+  padding: 10px;
+  &-close{
+    opacity: 0.5;
+    transition: opacity 0.2s ease-in-out;
+    cursor: pointer;
+    &:hover{
+      opacity: 1;
+    }
+  }
+}
+}
+
+.item__content{
+  &-text{
+    margin-bottom: 5px;
+    font-size: 16px;
+  }
+  &-price{
+    font-size: 14px;
+  }
+}
+
+
+.services{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 80px;
+  &__content{
+    max-width: 522px;
+    &-title{
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 56px;
+      margin-bottom: 16px;
+    }
+    &-text{
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 28px;
+      margin-bottom: 74px;
+    }
+  }
+}
+
+.favourites{
+  background-color: #F3F4F6;
+  display: flex;
+  margin-bottom: 80px;
+  &__content{
+    max-width: 583px;
+    margin: 88px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &-title{
+      font-weight: 700;
+      font-size: 40px;
+      line-height: 56px;
+    }
+    &-btn{
+      width: 152px;
+      height: 40px;
+      padding: 8px 38px;
+      border-radius: 19px;
+      background-color: #156963;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background-color .2s ease-in-out;
+      &:hover{
+        background-color: lighten(#156963, 5%);
+      }
+      &:active{
+        background-color: darken(#156963, 5%);
+      }
+    }
+  }
+}
+
+.footer{
+  display: flex;
+  justify-content: space-between;
+  max-width: 946px;
+  margin: auto;
+  &__adress{
+    max-width: 282px;
+    &-title{
+      font-weight: 500;
+      font-size: 24px;
+      line-height: 24px;
+      text-transform: uppercase;
+      color: #156963;
+      margin-bottom: 24px;
+    }
+    &-name{
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 19px;
+      margin-bottom: 10px;
+    }
+    &-text{
+      font-weight: 400;
+      font-size: 13px;
+      line-height: 20px;
+      color: #4F4F4F;
+    }
+  }
+  &__menu{
+    &-title{
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 16px;
+      margin-bottom: 20px;
+    }
+  }
+  &__list{
+      &-item{
+        margin-bottom: 10px;
+        &--link{
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16px;
+        color: #000;
+        &:hover{
+          border-bottom: 2px solid #156963;
+        }
+        &:active{
+          color: #156963;
+        }
+      }
+    }
+  }
+  &__input{
+    &-title{
+      font-weight: 500;
+      font-size: 16px;
+      line-height: 16px;
+      margin-bottom: 14px;
+    }
+    &-input{
+      height: 32px;
+      padding: 0 10px;
+      border: 1px solid #f2f2f2;
+      border-radius: 10px;
+      width: 100%;
+      margin-bottom: 14px;
+    }
+    &-btn{
+      font-size: 8px;
+      line-height: 14px;
+      padding: 4px 12px;
+      border: 0;
+      border-radius: 19px;
+      background-color: #156963;
+      color: #fff;
+      cursor: pointer;
+      transition: background-color .2s ease-in-out;
+      &:hover{
+        background-color: lighten(#156963, 5%);
+      }
+      &:active{
+        background-color: darken(#156963, 5%);
+      }
+    }
+  }
+}

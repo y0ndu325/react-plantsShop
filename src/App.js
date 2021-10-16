@@ -1,25 +1,17 @@
+import Product from './components/Product'
+import Header from './components/Header';
+import Drawer from './components/Drawer';
+import Footer from './components/Footer';
 
 
 
 function App() {
   return (
     <div className="wrapper">
-      <header className='header'>
-        <div className='header__logo'>
-          <img width={36} height={36} src='images/logo.svg' />
-        </div>
-        <ul className='header__content'>
-          <li className='header__content-link'>
-            <img src='images/cart.svg' />
-            <span className='header__content-price'>85 <b>IDR</b></span>
-          </li>
-          <li className='header__content-link'>
-            <img width={20} height={20} src='images/user.svg' />
-          </li>
-        </ul>
-      </header>
+      
+    <Drawer /> 
 
-
+    <Header />
 
       <div className='benefits'>
         <div className='card'>
@@ -73,81 +65,50 @@ function App() {
         <div className='product__list'>
           <h3 className='product__list-title'>Featured Plants</h3>
           <div className='product__list-search'>
-            <img src='images/search.svg' alt='search'/>
+            <img src='images/search.svg' alt='search' />
             <input className='product__list-search--placeholder' placeholder='Search...'></input>
           </div>
         </div>
         <div className='product__tools'>
-          <div className='product__item'>
-            <div className='product__item-favorite'>
-            <img src='images/unliked.svg' width={25} height={25} alt='unliked'/>
-            </div>
-            <img className='product__item-img' src='images/1.png' width={196}/>
-            <div className='product__item-description'>
-              <div >
-                <h6 className='product__item-name'>Kaktus Plants</h6>
-                <p className='product__item-price'>IDR 85.000</p>
-              </div>
 
-              <button className='product__item-add'>
-                <img src='images/add.svg' width={30} height={30} />
-              </button>
-
-            </div>
-          </div>
-          <div className='product__item'>
-            <div className='product__item-favorite'>
-            <img src='images/unliked.svg' width={25} height={25} alt='unliked'/>
-            </div>
-            <img className='product__item-img' src='images/1.png' width={196}/>
-            <div className='product__item-description'>
-              <div >
-                <h6 className='product__item-name'>Kaktus Plants</h6>
-                <p className='product__item-price'>IDR 85.000</p>
-              </div>
-
-              <button className='product__item-add'>
-                <img src='images/add.svg' width={30} height={30} />
-              </button>
-
-            </div>
-          </div>
-          <div className='product__item'>
-            <div className='product__item-favorite'>
-            <img src='images/liked.svg' width={25} height={25} alt='unliked'/>
-            </div>
-            <img className='product__item-img' src='images/1.png' width={196}/>
-            <div className='product__item-description'>
-              <div >
-                <h6 className='product__item-name'>Kaktus Plants</h6>
-                <p className='product__item-price'>IDR 85.000</p>
-              </div>
-
-              <button className='product__item-add'>
-                <img src='images/check.svg' width={30} height={30} />
-              </button>
-
-            </div>
-          </div>
-          <div className='product__item'>
-            <div className='product__item-favorite'>
-            <img src='images/unliked.svg' width={25} height={25} alt='unliked'/>
-            </div>
-            <img className='product__item-img' src='images/1.png' width={196}/>
-            <div className='product__item-description'>
-              <div >
-                <h6 className='product__item-name'>Kaktus Plants</h6>
-                <p className='product__item-price'>IDR 85.000</p>
-              </div>
-
-              <button className='product__item-add'>
-                <img src='images/add.svg' width={30} height={30} />
-              </button>
-
-            </div>
-          </div>
+          <Product />
+          <Product />
+          <Product />
+          <Product />
+          
         </div>
       </div>
+
+      <div className="services">
+        <div className="services__content">
+          <h3 className="services__content-title">Buy more plants, it helps you to be relaxed
+          </h3>
+          <p className="services__content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida gravida aliquam. Pellentesque et lobortis nisl. Sed et mauris justo. Nulla eu enim non mauris maximus dignissim. Maecenas vitae eros sapien. Quisque pellentesque tempus dignissim.
+          </p>
+          <div className="services__content-img">
+            <img src="images/services-content.png" alt="services" />
+          </div>
+        </div>
+        <div className="services__image">
+          <img src="images/services-image.png" alt="services" />
+        </div>
+      </div>
+
+      <div className="favourites">
+        <div className="favourites__content">
+          <h1 className="favourites__content-title">
+            Get your favourites plant on our shop now
+          </h1>
+          <a className="favourites__content-btn" href="#">
+            Visit Shop
+          </a>
+        </div>
+        <div className="favourites__image">
+          <img src="images/favourites.png" alt="favourites" />
+        </div>
+      </div>
+
+      <Footer />
 
     </div>
   );
