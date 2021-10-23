@@ -1,17 +1,37 @@
-import Product from './components/Product'
+import React from 'react';
+import Product from './components/Product';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 import Footer from './components/Footer';
 
 
-
 function App() {
+  const [items, setItems] = React.useState([])
+  const [cartItems, setCartItems] = React.useState([])
+  const [cartOpened, setCartOpened] = React.useState(false);
+
+  React.useEffect(() => {
+    fetch('https://6170981923781c0017289aa8.mockapi.io/items')
+    .then((res) =>{
+      return res.json();
+    })
+    .then((json) =>{
+      setItems(json);
+    })
+  }, []);
+
+  const onAddToCart = (obj) => {
+    setCartItems( prev =>[...prev, obj])
+  }
+
+  console.log(cartItems)
+
   return (
     <div className="wrapper">
       
-    <Drawer /> 
+    {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)}/>} 
 
-    <Header />
+    <Header onClickCart={() => setCartOpened(true)}/>
 
       <div className='benefits'>
         <div className='card'>
@@ -71,10 +91,15 @@ function App() {
         </div>
         <div className='product__tools'>
 
-          <Product />
-          <Product />
-          <Product />
-          <Product />
+          {items.map((item)=>(
+            <Product 
+            title={item.title} 
+            price={item.price} 
+            imageUrl={item.imageUrl}
+            onPlus={(obj) => onAddToCart(obj)}
+            />
+          ))}
+          
           
         </div>
       </div>

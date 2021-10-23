@@ -1,11 +1,11 @@
-function Header(){
+function Header(props){
     return(
         <header className='header'>
         <div className='header__logo'>
           <img width={36} height={36} src='images/logo.svg' />
         </div>
         <ul className='header__content'>
-          <li className='header__content-link'>
+          <li className='header__content-link' onClick={props.onClickCart}>
             <img src='images/cart.svg' />
             <span className='header__content-price'>85 <b>IDR</b></span>
           </li>
