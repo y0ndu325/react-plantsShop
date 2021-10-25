@@ -1,139 +1,89 @@
 import React from 'react';
-import Product from './components/Product';
+import {Route} from "react-router-dom";
+import axios from 'axios';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
+import Home from './pages/Home';
 import Footer from './components/Footer';
+import Favorites from './pages/Favorites';
 
 
 function App() {
-  const [items, setItems] = React.useState([])
-  const [cartItems, setCartItems] = React.useState([])
+  const [items, setItems] = React.useState([]);
+  const [cartItems, setCartItems] = React.useState([]);
+  const [favorites, setFavorites] = React.useState([]);
+  const [searchValue, setSearchValue] = React.useState('')
   const [cartOpened, setCartOpened] = React.useState(false);
 
   React.useEffect(() => {
-    fetch('https://6170981923781c0017289aa8.mockapi.io/items')
-    .then((res) =>{
-      return res.json();
-    })
-    .then((json) =>{
-      setItems(json);
-    })
+    axios.get('https://6170981923781c0017289aa8.mockapi.io/items').then((res) => {
+    setItems(res.data)
+  })
+    axios.get('https://6170981923781c0017289aa8.mockapi.io/cart').then((res) => {
+    setCartItems(res.data)
+  })
+    axios.get('https://6170981923781c0017289aa8.mockapi.io/favorites').then((res) => {
+    setFavorites(res.data)
+  })
   }, []);
 
+  
+
   const onAddToCart = (obj) => {
-    setCartItems( prev =>[...prev, obj])
+    axios.post('https://6170981923781c0017289aa8.mockapi.io/cart', obj);
+    setCartItems( prev =>[...prev, obj]);
   }
 
-  console.log(cartItems)
+  const onRemoveItem = (id) => {
+    axios.delete(`https://6170981923781c0017289aa8.mockapi.io/cart/${id}`);
+    setCartItems((prev) => prev.filter((item) => item.id !== id));
+  }
+
+  const onAddToFavorite = async(obj) => {
+    try {
+      if (favorites.find(favObj => favObj.id === obj.id)){
+        axios.delete(`https://6170981923781c0017289aa8.mockapi.io/favorites/${obj.id}`);
+      }
+      else{
+        const {data} = await axios.post('https://6170981923781c0017289aa8.mockapi.io/favorites', obj);
+        setFavorites( prev =>[...prev, data]);
+      }
+    } catch (error) {
+      alert('error')
+    }
+      
+  }
+
+  const onChangeSearchInput = (event) => {
+    setSearchValue(event.target.value)
+  }
 
   return (
     <div className="wrapper">
       
-    {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)}/>} 
+    {cartOpened && <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem}/>} 
 
     <Header onClickCart={() => setCartOpened(true)}/>
 
-      <div className='benefits'>
-        <div className='card'>
-          <div className='card__container'>
-            <div className='card__content'>
-              <img src='images/car.svg' />
-              <h3 className='card__title'>
-                Fast <br />
-                Delivery
-              </h3>
-            </div>
-            <h6 className='card__text'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </h6>
-          </div>
-        </div>
-        <div className='card'>
-          <div className='card__container'>
-            <div className='card__content'>
-              <img src='images/headphones.svg' />
-              <h3 className='card__title'>
-                Great Customer <br /> Service
-              </h3>
-            </div>
-            <h6 className='card__text'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </h6>
-          </div>
-        </div>
-        <div className='card'>
-          <div className='card__container'>
-            <div className='card__content'>
-              <img src='images/plant.svg' />
-              <h3 className='card__title'>
-                Original <br /> Plants
-              </h3>
-            </div>
-            <h6 className='card__text'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </h6>
-          </div>
-        </div>
-        <div className='card'>
-          <div className='card__container'>
-            <div className='card__content'>
-              <img src='images/dollar.svg' />
-              <h3 className='card__title'>
-                Affordable <br /> Price
-              </h3>
-            </div>
-            <h6 className='card__text'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard </h6>
-          </div>
-        </div>
-      </div>
+      <Route path='/' exact>
+        <Home 
+        items={items}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        onChangeSearchInput={onChangeSearchInput}
+        onAddToCart={onAddToCart}
+        onAddToFavorite={onAddToFavorite}
+        Footer={Footer}
+        />
+      </Route>
 
-      <div className='product'>
-        <div className='product__list'>
-          <h3 className='product__list-title'>Featured Plants</h3>
-          <div className='product__list-search'>
-            <img src='images/search.svg' alt='search' />
-            <input className='product__list-search--placeholder' placeholder='Search...'></input>
-          </div>
-        </div>
-        <div className='product__tools'>
+      <Route path='/favorites' exact>
+        <Favorites items={favorites} onAddToFavorite={onAddToFavorite}/>
+      </Route>
 
-          {items.map((item)=>(
-            <Product 
-            title={item.title} 
-            price={item.price} 
-            imageUrl={item.imageUrl}
-            onPlus={(obj) => onAddToCart(obj)}
-            />
-          ))}
-          
-          
-        </div>
-      </div>
+      
 
-      <div className="services">
-        <div className="services__content">
-          <h3 className="services__content-title">Buy more plants, it helps you to be relaxed
-          </h3>
-          <p className="services__content-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi gravida gravida aliquam. Pellentesque et lobortis nisl. Sed et mauris justo. Nulla eu enim non mauris maximus dignissim. Maecenas vitae eros sapien. Quisque pellentesque tempus dignissim.
-          </p>
-          <div className="services__content-img">
-            <img src="images/services-content.png" alt="services" />
-          </div>
-        </div>
-        <div className="services__image">
-          <img src="images/services-image.png" alt="services" />
-        </div>
-      </div>
-
-      <div className="favourites">
-        <div className="favourites__content">
-          <h1 className="favourites__content-title">
-            Get your favourites plant on our shop now
-          </h1>
-          <a className="favourites__content-btn" href="#">
-            Visit Shop
-          </a>
-        </div>
-        <div className="favourites__image">
-          <img src="images/favourites.png" alt="favourites" />
-        </div>
-      </div>
-
-      <Footer />
+      
 
     </div>
   );
