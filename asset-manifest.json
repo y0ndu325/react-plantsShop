@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/react-plantsShop/static/css/main.7bf3c5e3.chunk.css",
+    "main.js": "/react-plantsShop/static/js/main.f55a7c35.chunk.js",
+    "main.js.map": "/react-plantsShop/static/js/main.f55a7c35.chunk.js.map",
+    "runtime-main.js": "/react-plantsShop/static/js/runtime-main.fd3246f0.js",
+    "runtime-main.js.map": "/react-plantsShop/static/js/runtime-main.fd3246f0.js.map",
+    "static/js/2.84cb0d2e.chunk.js": "/react-plantsShop/static/js/2.84cb0d2e.chunk.js",
+    "static/js/2.84cb0d2e.chunk.js.map": "/react-plantsShop/static/js/2.84cb0d2e.chunk.js.map",
+    "index.html": "/react-plantsShop/index.html",
+    "static/css/main.7bf3c5e3.chunk.css.map": "/react-plantsShop/static/css/main.7bf3c5e3.chunk.css.map",
+    "static/js/2.84cb0d2e.chunk.js.LICENSE.txt": "/react-plantsShop/static/js/2.84cb0d2e.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.fd3246f0.js",
+    "static/js/2.84cb0d2e.chunk.js",
+    "static/css/main.7bf3c5e3.chunk.css",
+    "static/js/main.f55a7c35.chunk.js"
+  ]
+}
