@@ -126,6 +126,7 @@ a, ul, li{
   }
   &__tools{
     display: flex;
+    flex-wrap: wrap;
   }
   &__item{
     width: 217px;
@@ -242,6 +243,11 @@ flex-direction: column;
       &:active{
         background-color: darken(#156963, 5%);
       }
+      &:disabled{
+        background-color: #041f1d !important;
+        cursor: default;
+        animation: button-loading 0.7s ease-in-out infinite;
+      }
     }
     &--total{
       font-weight: 500;
@@ -268,6 +274,18 @@ flex-direction: column;
     }
   }
 }
+}
+
+@keyframes button-loading {
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0.7;
+  }
+  100%{
+    opacity: 1;
+  }
 }
 
 .item__content{

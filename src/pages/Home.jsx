@@ -1,20 +1,39 @@
+import React from "react";
 import Product from "../components/Product";
 import Footer from "../components/Footer";
+import AppContext from "../context";
 
 function Home(
-    {
-        items,
-        searchValue,
-        setSearchValue,
-        onChangeSearchInput,
-        onAddToCart,
-        onAddToFavorite,
-        Footer
-    })
-    {
-    return (
-        <div>
-            <div className='benefits'>
+  {
+    items,
+    searchValue,
+    setSearchValue,
+    onChangeSearchInput,
+    onAddToCart,
+    onAddToFavorite,
+    Footer,
+    isLoading
+  }) {
+
+  const { isItemAdded } = React.useContext(AppContext);
+
+  const renderItems = () => {
+    const filtredItems = items.filter((item) =>
+      item.title.toLowerCase().includes(searchValue.toLowerCase()),
+    );
+    return (isLoading ? [...Array(10)] : filtredItems).map((item, index) => (
+      <Product
+        key={index}
+        onFavorite={(obj) => onAddToFavorite(obj)}
+        onPlus={(obj) => onAddToCart(obj)}
+        loading={isLoading}
+        {...item}
+      />
+    ))
+  }
+  return (
+    <div>
+      <div className='benefits'>
         <div className='card'>
           <div className='card__container'>
             <div className='card__content'>
@@ -67,35 +86,21 @@ function Home(
           <h3 className='product__list-title'>Featured Plants</h3>
           <div className='product__list-search'>
             <img src='images/search.svg' alt='search' />
-            {searchValue && 
-            (<img 
-              onClick={() => setSearchValue('')} 
-              className='product__list-search--clear' 
-              src='images/close.svg' width={15} height={15} 
-              alt='clear' />)}
+            {searchValue &&
+              (<img
+                onClick={() => setSearchValue('')}
+                className='product__list-search--clear'
+                src='images/close.svg' width={15} height={15}
+                alt='clear' />)}
             <input onChange={onChangeSearchInput} value={searchValue} className='product__list-search--placeholder' placeholder='Search...'></input>
           </div>
         </div>
         <div className='product__tools'>
 
-          {items
-          .filter((item) => item.title.toLowerCase().includes(searchValue.toLowerCase()))
-          .map((item, index)=>(
-            <Product 
-            key={index}
-            id={item.id}
-            title={item.title} 
-            price={item.price} 
-            imageUrl={item.imageUrl}
-            onFavorite={(obj) =>  onAddToFavorite(obj)}
-            onPlus={(obj) => onAddToCart(obj)}
-            />
-          ))}
-          
-          
+          {renderItems()}
+
         </div>
       </div>
-
       <div className="services">
         <div className="services__content">
           <h3 className="services__content-title">Buy more plants, it helps you to be relaxed
@@ -124,12 +129,9 @@ function Home(
           <img src="images/favourites.png" alt="favourites" />
         </div>
       </div>
-
       <Footer />
-
     </div>
-        
-    );
+  );
 }
 
 export default Home;
